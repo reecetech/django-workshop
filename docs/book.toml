@@ -1,0 +1,5 @@
+[book]
+authors = ["RobbieClarken"]
+multilingual = false
+src = "src"
+title = "Django Workshop"
