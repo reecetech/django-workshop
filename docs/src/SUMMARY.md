@@ -1,6 +1,6 @@
 # Summary
 
-- [Installation](./01-Installation.md)
+- [Installation](./01-installation.md)
 - [Creating a Project](./02-creating-a-project.md)
 - [Views, Templates and URLs](./03-views-templates-and-urls.md)
 - [Models & Django Admin](./04-models-and-admin.md)
