@@ -35,13 +35,14 @@ urlpatterns = [
 > home page of blog. If you wanted the url for your blog to be `http://127.0.0.1:8000/myblog/` then
 > you would write: `path('myblog/', views.posts)`.
 
-Visit http://127.0.0.1:8000/ in your browser and you should see the text from the view function.
+Visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser and you should see the text
+from the view function.
 
 Instead of returning plain text, we would like our view function to return HTML so we can use
 display headings, links, images etc. To do this we create a Django template file.
 
 Right-click on the `blog` folder and select **New / Directory**. Name the folder `templates`.
-Right-click on `templates` and select *New / HTML File*. Name the file `posts.html`.
+Right-click on `templates` and select **New / HTML File**. Name the file `posts.html`.
 
 PyCharm helpfully adds some starting HTML in the new file. In the `<title>` tag enter `My Blog` and
 hit Enter. In the `<body>` tags enter:

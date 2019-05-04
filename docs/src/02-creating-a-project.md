@@ -36,10 +36,20 @@ Create an app called `blog` by running the following command:
 python manage.py startapp blog
 ```
 
-You will now see a folder called `blog`. *TODO: Explain the files in `blog`?*
+You will now see a folder called `blog`. Inside the `blog` folder Django has created some files to
+scaffold your app. These are mostly empty now but we will add some content to them shortly. The
+following table summaries the intention behind each file:
 
-To link your `blog` app into the Django project, open `mysite/settings.py` and at the end of the
-`INSTALLED_APPS` list (around line 40) add `'blog'`. It should look like:
+| File        | Purpose                                                         |
+| ---         | ---                                                             |
+| `views.py`  | functions and classes that handle requests made to your website |
+| `models.py` | classes for interacting with your database                      |
+| `admin.py`  | classes for configuring the Django admin interface              |
+| `apps.py`   | used to configure the app                                       |
+| `tests.py`  | a place to write automated tests for your app                   |
+
+To install your `blog` app into your Django project, open `mysite/settings.py` and at the end of the
+`INSTALLED_APPS` list add `'blog'`. It should look like:
 
 ```python
 INSTALLED_APPS = [
@@ -60,3 +70,15 @@ python manage.py runserver
 ```
 
 Go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in web browser to see your site.
+
+> The IP address `127.0.0.1` refers to your computer. `8000` is an arbitrary port chosen
+> by Django. If you wanted to run multiple Django projects on the same computer at the same time
+> you would configure them to listen on different ports.
+
+## Challenges
+
+1. Run the following command to see some of the other django management commands that are available:
+
+    ```bash
+    python manage.py help
+    ```
