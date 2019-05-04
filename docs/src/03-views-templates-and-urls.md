@@ -15,7 +15,7 @@ def posts(request):
     return HttpResponse('It works!')
 ```
 
-We also need to configure which url will execute this view function. Open `urls.py` and
+We also need to configure which url will execute this view function. Open `mysite/urls.py` and
 import our `views` module at the top of the file below the existing import:
 
 ```python
@@ -69,6 +69,9 @@ Your full HTML should look like:
 Back in `blog/views.py` change the `posts` function to:
 
 ```python
+from django.shortcuts import render
+
+
 def posts(request):
     return render(request, "posts.html")
 ```

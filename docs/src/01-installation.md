@@ -16,6 +16,13 @@ Python 3.6 or later installed, jump to the [PyCharm installation section](#insta
    tick the **Add Python 3.7 to PATH** checkbox.
 
 ![](images/Windows-Installation.png)
+6. To check if the installation was successful, launch a terminal (hit **Command + R**, 
+type in `cmd` and hit Enter) and then enter the following command into your terminal:
+
+```bash
+python --version
+```
+This should output Python 3.7.3
 
 ## Install Python: macOS
 
