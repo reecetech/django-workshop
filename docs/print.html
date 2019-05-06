@@ -1,0 +1,563 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Django Workshop</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Django Workshop</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#install-python" id="install-python"><h1>Install Python</h1></a>
+<blockquote>
+<p>Sections of this workshop were taken from the excellent <a href="https://tutorial.djangogirls.org/en/">Django Girls Tutorial</a>,
+a more comprehensive tutorial that we encourage you to try in your own time.</p>
+</blockquote>
+<p>In this workshop we will be using Python 3.6 or later and the PyCharm editor. If you already have
+Python 3.6 or later installed, jump to the <a href="#installing-pycharm">PyCharm installation section</a>.</p>
+<a class="header" href="#install-python-windows" id="install-python-windows"><h2>Install Python: Windows</h2></a>
+<ol>
+<li>Go to <a href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a></li>
+<li>Click on the <strong>Latest Python 3 Release - Python x.x.x</strong> link</li>
+<li>Scroll down to the <strong>Files</strong> section</li>
+<li>Download the <strong>Windows x86-64 executable installer</strong></li>
+<li>Execute the installer and follow the promps. When you get to the <strong>Setup</strong> screen make sure you
+tick the <strong>Add Python 3.7 to PATH</strong> checkbox.</li>
+</ol>
+<p><img src="images/Windows-Installation.png" alt="" /></p>
+<ol start="6">
+<li>To check if the installation was successful, launch a terminal (hit <strong>Command + R</strong>,
+type in <code>cmd</code> and hit Enter) and then enter the following command into your terminal:</li>
+</ol>
+<pre><code class="language-bash">python --version
+</code></pre>
+<p>This should output Python 3.7.3</p>
+<a class="header" href="#install-python-macos" id="install-python-macos"><h2>Install Python: macOS</h2></a>
+<p>Check if you already have Python 3 installed by launching a terminal (hit <strong>Command + Space</strong>,
+type in <code>terminal</code> and hit Enter) and then entering the following command into your terminal:</p>
+<pre><code class="language-bash">python3 --version
+</code></pre>
+<p>If the command outputs Python 3.6 or later, continue to the
+<a href="#installing-pycharm">PyCharm installation section</a>.</p>
+<p>If you don't have Python installed, or if you want a newer version, follow the instructions at
+<a href="https://brew.sh/">https://brew.sh/</a> to install the Homebrew package manager and then run:</p>
+<pre><code class="language-bash">brew install python3
+</code></pre>
+<a class="header" href="#install-python-linux" id="install-python-linux"><h2>Install Python: Linux</h2></a>
+<p>It is very likely that you already have Python installed out of the box. To check if you have it
+installed (and which version it is), open a console and type the following command:</p>
+<pre><code class="language-bash">python3 --version
+</code></pre>
+<p>If the command outputs Python 3.6 or later, continue to the
+<a href="#installing-pycharm">PyCharm installation section</a>. Otherwise install Python with your operating
+system's package manager:</p>
+<a class="header" href="#debian-or-ubuntu" id="debian-or-ubuntu"><h3>Debian or Ubuntu</h3></a>
+<p>Open a terminal and run:</p>
+<pre><code class="language-bash">sudo apt-get install python3
+</code></pre>
+<a class="header" href="#fedora" id="fedora"><h3>Fedora</h3></a>
+<p>Open a terminal and run:</p>
+<pre><code class="language-bash">sudo yum install python3
+</code></pre>
+<a class="header" href="#centos" id="centos"><h3>CentOS</h3></a>
+<p>Open a terminal and run:</p>
+<pre><code class="language-bash">sudo yum install python3
+</code></pre>
+<a class="header" href="#installing-pycharm" id="installing-pycharm"><h2>Installing PyCharm</h2></a>
+<p>To install PyCharm visit <a href="https://www.jetbrains.com/pycharm/">https://www.jetbrains.com/pycharm/</a>
+and click <strong>Download Now</strong>. The Community edition is free and has all the features you will need for
+this workshop.</p>
+<a class="header" href="#creating-a-new-django-project" id="creating-a-new-django-project"><h1>Creating a New Django Project</h1></a>
+<p>Open PyCharm and start a new project by clicking <strong>Create New Project</strong> from the welcome screen or
+<strong>New Project...</strong> from the <strong>File</strong> menu.</p>
+<p>In the <strong>Location</strong> box, replace <code>untitled</code> with <code>mysite</code>. Under <strong>Project Interpreter</strong> make sure
+<strong>Virtualenv</strong> is selected.</p>
+<blockquote>
+<p>If you have PyCharm Professional Edition you will see a Django option when creating a new project.
+We won't use it during this workshop but you may wish to try it on your own as it simplifies the
+setup of Django projects.</p>
+</blockquote>
+<p>In the bottom of the window, open the <strong>Terminal</strong> pane. Enter the following command to install
+Django:</p>
+<pre><code class="language-bash">pip install django
+</code></pre>
+<p>Once pip has finished installing Django, create a new Django project by executing:</p>
+<pre><code>django-admin startproject mysite .
+</code></pre>
+<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>mysite</code> and a file called
+<code>manage.py</code>. The <code>manage.py</code> is used to execute Django management commands like creating admin users
+and running database migrations.</p>
+<p>Next we will create what is known as a Django app. In the Django context, an app is a component of a
+website site. Apps are used to provide structure to a project and to group files into re-usable parts.</p>
+<p>Create an app called <code>blog</code> by running the following command:</p>
+<pre><code class="language-bash">python manage.py startapp blog
+</code></pre>
+<p>You will now see a folder called <code>blog</code>. Inside the <code>blog</code> folder Django has created some files to
+scaffold your app. These are mostly empty now but we will add some content to them shortly. The
+following table summaries the intention behind each file:</p>
+<table><thead><tr><th> File        </th><th> Purpose                                                         </th></tr></thead><tbody>
+<tr><td> <code>views.py</code>  </td><td> functions and classes that handle requests made to your website </td></tr>
+<tr><td> <code>models.py</code> </td><td> classes for interacting with your database                      </td></tr>
+<tr><td> <code>admin.py</code>  </td><td> classes for configuring the Django admin interface              </td></tr>
+<tr><td> <code>apps.py</code>   </td><td> used to configure the app                                       </td></tr>
+<tr><td> <code>tests.py</code>  </td><td> a place to write automated tests for your app                   </td></tr>
+</tbody></table>
+<p>To install your <code>blog</code> app into your Django project, open <code>mysite/settings.py</code> and at the end of the
+<code>INSTALLED_APPS</code> list add <code>'blog'</code>. It should look like:</p>
+<pre><code class="language-python">INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+]
+</code></pre>
+<p>You can now run your site by executing:</p>
+<pre><code class="language-bash">python manage.py runserver
+</code></pre>
+<p>Go to <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in web browser to see your site.</p>
+<blockquote>
+<p>The IP address <code>127.0.0.1</code> refers to your computer. <code>8000</code> is an arbitrary port chosen
+by Django. If you wanted to run multiple Django projects on the same computer at the same time
+you would configure them to listen on different ports.</p>
+</blockquote>
+<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
+<ol>
+<li>
+<p>Run the following command to see some of the other django management commands that are available:</p>
+<pre><code class="language-bash">python manage.py help
+</code></pre>
+</li>
+</ol>
+<a class="header" href="#views-templates-and-urls" id="views-templates-and-urls"><h1>Views, Templates and URLs</h1></a>
+<p>We will now create a page to display the posts made to our blog. In Django this requires creating a
+function called a <strong>view function</strong> that receives a request from the web browser and returns a response that
+the browser will display to the user.</p>
+<p>To create the view function, open <code>blog/views.py</code> and add the following:</p>
+<pre><code class="language-python">from django.http import HttpResponse
+
+
+def posts(request):
+    return HttpResponse('It works!')
+</code></pre>
+<p>We also need to configure which url will execute this view function. Open <code>mysite/urls.py</code> and
+import our <code>views</code> module at the top of the file below the existing import:</p>
+<pre><code class="language-python">from blog import views
+</code></pre>
+<p>Add your <code>posts</code> view to the <code>urlpatterns</code>:</p>
+<pre><code class="language-python">urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.posts),
+]
+</code></pre>
+<blockquote>
+<p>The first argument to <code>path</code> is an empty string because we want the blog posts to appear on the
+home page of blog. If you wanted the url for your blog to be <code>http://127.0.0.1:8000/myblog/</code> then
+you would write: <code>path('myblog/', views.posts)</code>.</p>
+</blockquote>
+<p>Visit <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in your browser and you should see the text
+from the view function.</p>
+<p>Instead of returning plain text, we would like our view function to return HTML so we can use
+display headings, links, images etc. To do this we create a Django template file.</p>
+<p>Right-click on the <code>blog</code> folder and select <strong>New / Directory</strong>. Name the folder <code>templates</code>.
+Right-click on <code>templates</code> and select <strong>New / HTML File</strong>. Name the file <code>posts.html</code>.</p>
+<p>PyCharm helpfully adds some starting HTML in the new file. In the <code>&lt;title&gt;</code> tag enter <code>My Blog</code> and
+hit Enter. In the <code>&lt;body&gt;</code> tags enter:</p>
+<pre><code class="language-html">&lt;h1&gt;Welcome to My Blog!&lt;/h1&gt;
+</code></pre>
+<p>Your full HTML should look like:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;My Blog&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to My Blog!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Back in <code>blog/views.py</code> change the <code>posts</code> function to:</p>
+<pre><code class="language-python">from django.shortcuts import render
+
+
+def posts(request):
+    return render(request, &quot;posts.html&quot;)
+</code></pre>
+<p>The reason we call our <code>posts.html</code> file a template is because Django provide dynamic data at
+runtime to this function to render to HTML. To demonstrate this, change the heading in <code>posts.html</code>
+to:</p>
+<pre><code class="language-html">&lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
+</code></pre>
+<p>Then make your <code>posts</code> view function provide your name to the template:</p>
+<pre><code class="language-python">def posts(request):
+    return render(request, &quot;posts.html&quot;, {&quot;name&quot;: &quot;Alice&quot;})
+</code></pre>
+<p>Refresh the page in your web browser and your name should be substituted into the heading. We will
+use this same technique to pass blog posts into the template to be rendered.</p>
+<a class="header" href="#models--django-admin" id="models--django-admin"><h1>Models &amp; Django Admin</h1></a>
+<p>We would like users to be able to create new blog posts through our site. These posts will need to
+be saved to a database. Django has built-in support for interacting with SQL databases through an
+Object-Relational-Mapping or ORM. In this model, rows in the database table are represented by
+Python objects called <strong>models</strong>. Let's create a model for our blog posts.</p>
+<p>Open <code>blog/models.py</code> and add the following:</p>
+<pre><code class="language-python">class Post(models.Model):
+    title = models.CharField(max_length=100)
+    body = models.TextField()
+    public = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+</code></pre>
+<p>Django will automatically create and update the database table schema to match our model. It does
+this through database <strong>migrations</strong> which are files containing the SQL commands needed to configure
+the database.</p>
+<p>To generate and apply migrations to create our Post table run the following in the terminal,
+(after terminating <code>python manage.py runserver</code> using <strong>Ctrl + C</strong>)</p>
+<pre><code class="language-bash">python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+<p>By default, Django uses SQLite as the database. You should see a <code>db.sqlite3</code> file; this is
+where SQLite will store our data.</p>
+<p>Django automatically creates an admin interface that we can use to interact with our database.</p>
+<p>In order to login we need to create a super-user account. Hop back to the terminal and run:</p>
+<pre><code class="language-bash">python manage.py createsuperuser
+</code></pre>
+<p>Set the username and password to whatever you would like. You can leave email address blank.</p>
+<p>You can now use that username and password to log in to the admin interface. Hop back to the terminal and runserver as before using this command:</p>
+<pre><code class="language-bash">python manage.py runserver
+</code></pre>
+<p>To access the admin interface, go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>.
+Once you are logged in
+you will see links to Groups and Users but not our Posts. This is because we haven't registered our
+<code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the following</p>
+<pre><code class="language-python">from .models import Post
+
+admin.site.register(Post)
+</code></pre>
+<p>If you refresh the admin interface in your browser you should now see a row for managing Posts.
+Click the Add link and create a few Posts. In the next stage we will render them on our website.</p>
+<a class="header" href="#querying--displaying-models" id="querying--displaying-models"><h1>Querying &amp; Displaying Models</h1></a>
+<p>Now we have some blog posts in our database we can update our view and template to display them.
+Open <code>blog/views.py</code> and import our <code>Post</code> model at the top of the file:</p>
+<pre><code class="language-python">from .models import Post
+</code></pre>
+<p>To load our posts from the database we execute a query on the <code>Post.objects</code> attribute. We want all
+posts so we use <code>Post.objects.all()</code>. We then want to pass the posts into our template so we update
+the dictionary passed into the <code>render</code> function:</p>
+<pre><code class="language-python">def posts(request):
+    posts = Post.objects.all()
+    return render(request, &quot;posts.html&quot;, {&quot;name&quot;: &quot;Alice&quot;, &quot;posts&quot;: posts})
+</code></pre>
+<p>Inside <code>blog/templates/posts.html</code>, we wish to loop over all our posts and display the title and the
+body of the post. We can do this in a Django template using the <code>{% for ... %}</code> template tag which
+is terminated with <code>{% endfor %}</code>:</p>
+<pre><code class="language-html">&lt;body&gt;
+    &lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
+
+    {% for post in posts %}
+    &lt;h2&gt;{{ post.title }}&lt;/h2&gt;
+    &lt;p&gt;{{ post.body }}&lt;/p&gt;
+    {% endfor %}
+&lt;/body&gt;
+</code></pre>
+<p>For each post in our database, this for loop will generate a heading tag containing the post title
+and a paragraph tag (<code>&lt;p&gt;</code>) containing the body of the post. Save this and go back to
+<a href="http://127.0.0.1:8000/">your homepage</a> and you should see the posts that you entered in the admin
+interface.</p>
+<a class="header" href="#challenges-1" id="challenges-1"><h2>Challenges</h2></a>
+<ol>
+<li>
+<p>We are currently showing all posts, including those where <code>public</code> is set to false in the
+database. We can get only posts where <code>public</code> is true with:</p>
+<pre><code class="language-python">Post.objects.filter(public=True)
+</code></pre>
+<p>Update the view function so only public posts are displayed on your homepage. Use the admin
+interface to make some posts private and confirm they are no longer visible.</p>
+</li>
+<li>
+<p>If the body of a post contains multiple lines, the line breaks will not be visible on our
+homepage because HTML is whitespace insensitive. Fix this by ensuring line break tags
+are inserted into our HTML by applying
+<a href="https://docs.djangoproject.com/en/2.2/ref/templates/builtins/#std:templatefilter-linebreaks">the <code>linebreaks</code> filter</a>
+to our <code>post.body</code>:</p>
+<pre><code class="language-html">{{ post.body | linebreaks }}
+</code></pre>
+</li>
+<li>
+<p>In your browser, right-click on the page and choose <strong>View Page Source</strong> to see the actual HTML
+generated by the template.</p>
+</li>
+</ol>
+<a class="header" href="#forms" id="forms"><h1>Forms</h1></a>
+<p>Now that we can view our blog posts, it would be nice to be able to create them through our website.</p>
+<p>To enable this we will create a new page which will use a <code>ModelForm</code> to generate a HTML form that users
+can fill out to create a new post.</p>
+<p>Let's first create the template. Right-click on <code>blog/templates</code> and select <strong>New</strong>, <strong>HTML File</strong>.
+Call the file <code>new_post.html</code>. Make the title <code>New Post</code> and add a heading of <code>&lt;h1&gt;New Post&lt;/h1&gt;</code>.
+Your HTML should look like:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;New Post&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;New Post&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Create a new view function in <code>blog/views.py</code> which renders our template:</p>
+<pre><code class="language-python">def new_post(request):
+    return render(request, &quot;new_post.html&quot;)
+</code></pre>
+<p>Next we need to create a url for this page. Open <code>mysite/urls.py</code> and add a path for the new page to
+<code>urlpatterns</code>:</p>
+<pre><code>urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.posts),
+    path('new/', views.new_post),
+]
+</code></pre>
+<p>We would like to be able to get to this page from the homepage so open <code>blog/template/posts.html</code>
+and below the heading add a <code>&lt;a&gt;</code> tag:</p>
+<pre><code class="language-html">&lt;body&gt;
+    &lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
+    &lt;a href=&quot;/new/&quot;&gt;Create a new post&lt;/a&gt;
+</code></pre>
+<p>Test that everything works by refreshing your home page and following the link. You should see your
+<code>New Post</code> heading.</p>
+<p>We will create the form class in <code>blog/views.py</code> so open that file and at the top of the file import
+the <code>ModelForm</code> base class:</p>
+<pre><code class="language-python">from django.forms import ModelForm
+</code></pre>
+<p>At the bottom of the file, we will create a form class for our <code>Post</code> model by subclassing
+<code>ModelForm</code> and linking it to our model using the <code>Meta</code> inner-class:</p>
+<pre><code class="language-python">class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = [&quot;title&quot;, &quot;body&quot;, &quot;public&quot;]
+</code></pre>
+<p>The <code>fields</code> attribute determines which fields on our model can be set using this form.</p>
+<p>To render our form in the template we need to create a new instance in our view function and pass it
+into our template:</p>
+<pre><code class="language-python">def new_post(request):
+    form = PostForm()
+    return render(request, &quot;new_post.html&quot;, {&quot;form&quot;: form})
+</code></pre>
+<p>Then in <code>blog/templates/new_post.html</code> we render the form with <code>form.to_p</code>. This must go inside a
+<code>&lt;form&gt;</code> tag with a CSRF token which is used to fix a security vulnerability:</p>
+<pre><code class="language-html">&lt;body&gt;
+    &lt;h1&gt;New Post&lt;/h1&gt;
+    
+    &lt;form method=&quot;POST&quot;&gt;
+        {% csrf_token %}
+        {{ form.as_p }}
+        &lt;button&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+<p>Refresh your New Post page and you should see the form. You can complete it and hit Submit but
+currently it wont save because we haven't configured our view function to handle submissions.</p>
+<p>Since the browser will use the <code>/new/</code> url for both fetching the HTML and for submitting the
+form, both types of requests will be handled by our <code>new_post</code> view function. We can distinguish
+which is which by looking at the HTTP request method. Requests for the HTML will have method <code>GET</code>
+whereas submissions of the form will have method <code>POST</code>.</p>
+<p>Configure your view function to use the <code>PostForm</code> class to save data from <code>POST</code> requests:</p>
+<pre><code class="language-python">def new_post(request):
+    if request.method == &quot;POST&quot;:
+        form = PostForm(request.POST)
+        form.save()
+        return redirect(&quot;/&quot;)
+    form = PostForm()
+    return render(request, &quot;new_post.html&quot;, {&quot;form&quot;: form})
+</code></pre>
+<p>After the form is saved we redirect users back to the home page. You will need to import the
+redirect function at the top of <code>blog/views.py</code>:</p>
+<pre><code class="language-python">from django.shortcuts import render, redirect
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
