@@ -1,0 +1,9 @@
+[book]
+authors = ["Robbie Clarken", "Vidya Rani Dudagere Guruswamy"]
+multilingual = false
+src = "src"
+title = "Django Workshop"
+
+[build]
+build-dir = "docs"
+create-missing = false
