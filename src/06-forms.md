@@ -29,7 +29,7 @@ def new_post(request):
     return render(request, "new_post.html")
 ```
 
-Next we need to create a url for this page. Open `mysite/urls.py` and add a path for the new page to
+Next we need to create a url for this page. Open `myproject/urls.py` and add a path for the new page to
 `urlpatterns`:
 
 ```

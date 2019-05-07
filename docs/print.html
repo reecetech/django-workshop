@@ -214,9 +214,9 @@ Django:</p>
 <pre><code class="language-bash">pip install django
 </code></pre>
 <p>Once pip has finished installing Django, create a new Django project by executing:</p>
-<pre><code>django-admin startproject mysite .
+<pre><code>django-admin startproject myproject .
 </code></pre>
-<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>mysite</code> and a file called
+<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>myproject</code> and a file called
 <code>manage.py</code>. The <code>manage.py</code> is used to execute Django management commands like creating admin users
 and running database migrations.</p>
 <p>Next we will create what is known as a Django app. In the Django context, an app is a component of a
@@ -234,7 +234,7 @@ following table summaries the intention behind each file:</p>
 <tr><td> <code>apps.py</code>   </td><td> used to configure the app                                       </td></tr>
 <tr><td> <code>tests.py</code>  </td><td> a place to write automated tests for your app                   </td></tr>
 </tbody></table>
-<p>To install your <code>blog</code> app into your Django project, open <code>mysite/settings.py</code> and at the end of the
+<p>To install your <code>blog</code> app into your Django project, open <code>myproject/settings.py</code> and at the end of the
 <code>INSTALLED_APPS</code> list add <code>'blog'</code>. It should look like:</p>
 <pre><code class="language-python">INSTALLED_APPS = [
     'django.contrib.admin',
@@ -274,7 +274,7 @@ the browser will display to the user.</p>
 def posts(request):
     return HttpResponse('It works!')
 </code></pre>
-<p>We also need to configure which url will execute this view function. Open <code>mysite/urls.py</code> and
+<p>We also need to configure which url will execute this view function. Open <code>myproject/urls.py</code> and
 import our <code>views</code> module at the top of the file below the existing import:</p>
 <pre><code class="language-python">from blog import views
 </code></pre>
@@ -443,7 +443,7 @@ Your HTML should look like:</p>
 <pre><code class="language-python">def new_post(request):
     return render(request, &quot;new_post.html&quot;)
 </code></pre>
-<p>Next we need to create a url for this page. Open <code>mysite/urls.py</code> and add a path for the new page to
+<p>Next we need to create a url for this page. Open <code>myproject/urls.py</code> and add a path for the new page to
 <code>urlpatterns</code>:</p>
 <pre><code>urlpatterns = [
     path('admin/', admin.site.urls),

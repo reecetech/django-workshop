@@ -15,7 +15,7 @@ def posts(request):
     return HttpResponse('It works!')
 ```
 
-We also need to configure which url will execute this view function. Open `mysite/urls.py` and
+We also need to configure which url will execute this view function. Open `myproject/urls.py` and
 import our `views` module at the top of the file below the existing import:
 
 ```python

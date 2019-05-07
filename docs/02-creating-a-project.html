@@ -155,9 +155,9 @@ Django:</p>
 <pre><code class="language-bash">pip install django
 </code></pre>
 <p>Once pip has finished installing Django, create a new Django project by executing:</p>
-<pre><code>django-admin startproject mysite .
+<pre><code>django-admin startproject myproject .
 </code></pre>
-<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>mysite</code> and a file called
+<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>myproject</code> and a file called
 <code>manage.py</code>. The <code>manage.py</code> is used to execute Django management commands like creating admin users
 and running database migrations.</p>
 <p>Next we will create what is known as a Django app. In the Django context, an app is a component of a
@@ -175,7 +175,7 @@ following table summaries the intention behind each file:</p>
 <tr><td> <code>apps.py</code>   </td><td> used to configure the app                                       </td></tr>
 <tr><td> <code>tests.py</code>  </td><td> a place to write automated tests for your app                   </td></tr>
 </tbody></table>
-<p>To install your <code>blog</code> app into your Django project, open <code>mysite/settings.py</code> and at the end of the
+<p>To install your <code>blog</code> app into your Django project, open <code>myproject/settings.py</code> and at the end of the
 <code>INSTALLED_APPS</code> list add <code>'blog'</code>. It should look like:</p>
 <pre><code class="language-python">INSTALLED_APPS = [
     'django.contrib.admin',
