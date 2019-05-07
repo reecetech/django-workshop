@@ -32,7 +32,7 @@ def new_post(request):
 Next we need to create a url for this page. Open `myproject/urls.py` and add a path for the new page to
 `urlpatterns`:
 
-```
+```python
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.posts),
@@ -47,20 +47,22 @@ and below the heading add a `<a>` tag:
 <body>
     <h1>Welcome to {{ name }}'s Blog!</h1>
     <a href="/new/">Create a new post</a>
+
+    <!-- the rest of the body is unchanged -->
 ```
 
 Test that everything works by refreshing your home page and following the link. You should see your
 `New Post` heading.
 
-We will create the form class in `blog/views.py` so open that file and at the top of the file import
-the `ModelForm` base class:
+We will create a class to represent our form in `blog/views.py`. Open that file and at the top
+import the `ModelForm` base class:
 
 ```python
 from django.forms import ModelForm
 ```
 
-At the bottom of the file, we will create a form class for our `Post` model by subclassing
-`ModelForm` and linking it to our model using the `Meta` inner-class:
+At the bottom of the file create a form class for our `Post` model by subclassing `ModelForm` and
+linking it to our model using the `Meta` inner-class:
 
 ```python
 class PostForm(ModelForm):
@@ -71,8 +73,8 @@ class PostForm(ModelForm):
 
 The `fields` attribute determines which fields on our model can be set using this form.
 
-To render our form in the template we need to create a new instance in our view function and pass it
-into our template:
+To render our form in the template we need to create a new instance in our `new_post` view function
+and pass it into our template:
 
 ```python
 def new_post(request):
@@ -86,7 +88,7 @@ Then in `blog/templates/new_post.html` we render the form with `form.to_p`. This
 ```html
 <body>
     <h1>New Post</h1>
-    
+
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
@@ -95,7 +97,7 @@ Then in `blog/templates/new_post.html` we render the form with `form.to_p`. This
 </body>
 ```
 
-Refresh your New Post page and you should see the form. You can complete it and hit Submit but
+Refresh your New Post page and you should see the form. You can complete it and click Submit but
 currently it wont save because we haven't configured our view function to handle submissions.
 
 Since the browser will use the `/new/` url for both fetching the HTML and for submitting the

@@ -40,16 +40,17 @@ python manage.py createsuperuser
 
 Set the username and password to whatever you would like. You can leave email address blank.
 
-You can now use that username and password to log in to the admin interface. Hop back to the terminal and runserver as before using this command: 
+You can now use that username and password to log in to the admin interface. But first you will need
+to restart the server using this command: 
 
 ```bash
 python manage.py runserver
 ```
 
 To access the admin interface, go to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
-Once you are logged in
-you will see links to Groups and Users but not our Posts. This is because we haven't registered our
-`Post` model with the admin app. To do that open `blog/admin.py` and add the following
+Once you are logged in you will see links to Groups and Users but not our Posts. This is because we
+haven't registered our `Post` model with the admin app. To do that open `blog/admin.py` and add the
+following:
 
 ```python
 from .models import Post
@@ -58,4 +59,23 @@ admin.site.register(Post)
 ```
 
 If you refresh the admin interface in your browser you should now see a row for managing Posts.
-Click the Add link and create a few Posts. In the next stage we will render them on our website.
+Click the **Add** link and create a few Posts. Once you are done you should see several posts listed
+as in the screenshot below. In the next stage we will render them on our website.
+
+
+![](images/admin-interface-with-posts.png)
+
+## Challenges
+
+1. The admin interface can be highly customised. For example, we can make the table listing our
+   posts more informative by displaying the title of the posts instead of "Post object". To do this
+   replace `admin.site.register(Post)` line in `blog/admin.py` with:
+   
+   ```python
+   @admin.register(Post)
+   class PostAdmin(admin.ModelAdmin):
+       list_display = ['title', 'public', 'created']
+   ```
+   
+   Reload [http://127.0.0.1:8000/admin/blog/post/](http://127.0.0.1:8000/admin/blog/post/) to see
+   the effect.

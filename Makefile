@@ -6,4 +6,4 @@ build:
 serve:
 	mdbook serve
 
-.PHONY: build service
+.PHONY: build serve

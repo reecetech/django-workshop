@@ -76,9 +76,9 @@ def posts(request):
     return render(request, "posts.html")
 ```
 
-The reason we call our `posts.html` file a template is because Django provide dynamic data at
-runtime to this function to render to HTML. To demonstrate this, change the heading in `posts.html`
-to:
+The reason we call `posts.html` a template is because as well as regular HTML, it can contain
+special placeholder tags that Django can use to dynamically substitute in data each time a user
+requests the page. To demonstrate this, change the heading in `posts.html` to:
 
 ```html
 <h1>Welcome to {{ name }}'s Blog!</h1>
@@ -93,3 +93,14 @@ def posts(request):
 
 Refresh the page in your web browser and your name should be substituted into the heading. We will
 use this same technique to pass blog posts into the template to be rendered.
+
+
+## Challenges
+
+1. Django has a large number of
+   [**filters**](https://docs.djangoproject.com/en/2.2/ref/templates/builtins/#built-in-filter-reference)
+   that transform data inside templates. Try changing `{{ name }}` to
+   `{{ name | upper }}` to one such filter in action.
+3. What happens if you forget to supply the data to the template? Make it obvious when data is
+   missing by adding `'string_if_invalid': '<MISSING>',` to the `OPTIONS` dictionary under
+   `TEMPLATE` in `myproject/settings.py`.
