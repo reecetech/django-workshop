@@ -167,19 +167,36 @@ where SQLite will store our data.</p>
 <pre><code class="language-bash">python manage.py createsuperuser
 </code></pre>
 <p>Set the username and password to whatever you would like. You can leave email address blank.</p>
-<p>You can now use that username and password to log in to the admin interface. Hop back to the terminal and runserver as before using this command:</p>
+<p>You can now use that username and password to log in to the admin interface. But first you will need
+to restart the server using this command:</p>
 <pre><code class="language-bash">python manage.py runserver
 </code></pre>
 <p>To access the admin interface, go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>.
-Once you are logged in
-you will see links to Groups and Users but not our Posts. This is because we haven't registered our
-<code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the following</p>
+Once you are logged in you will see links to Groups and Users but not our Posts. This is because we
+haven't registered our <code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the
+following:</p>
 <pre><code class="language-python">from .models import Post
 
 admin.site.register(Post)
 </code></pre>
 <p>If you refresh the admin interface in your browser you should now see a row for managing Posts.
-Click the Add link and create a few Posts. In the next stage we will render them on our website.</p>
+Click the <strong>Add</strong> link and create a few Posts. Once you are done you should see several posts listed
+as in the screenshot below. In the next stage we will render them on our website.</p>
+<p><img src="images/admin-interface-with-posts.png" alt="" /></p>
+<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
+<ol>
+<li>
+<p>The admin interface can be highly customised. For example, we can make the table listing our
+posts more informative by displaying the title of the posts instead of &quot;Post object&quot;. To do this
+replace <code>admin.site.register(Post)</code> line in <code>blog/admin.py</code> with:</p>
+<pre><code class="language-python">@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'public', 'created']
+</code></pre>
+<p>Reload <a href="http://127.0.0.1:8000/admin/blog/post/">http://127.0.0.1:8000/admin/blog/post/</a> to see
+the effect.</p>
+</li>
+</ol>
 
                     </main>
 

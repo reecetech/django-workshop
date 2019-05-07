@@ -164,7 +164,7 @@ Your HTML should look like:</p>
 </code></pre>
 <p>Next we need to create a url for this page. Open <code>myproject/urls.py</code> and add a path for the new page to
 <code>urlpatterns</code>:</p>
-<pre><code>urlpatterns = [
+<pre><code class="language-python">urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.posts),
     path('new/', views.new_post),
@@ -175,23 +175,25 @@ and below the heading add a <code>&lt;a&gt;</code> tag:</p>
 <pre><code class="language-html">&lt;body&gt;
     &lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
     &lt;a href=&quot;/new/&quot;&gt;Create a new post&lt;/a&gt;
+
+    &lt;!-- the rest of the body is unchanged --&gt;
 </code></pre>
 <p>Test that everything works by refreshing your home page and following the link. You should see your
 <code>New Post</code> heading.</p>
-<p>We will create the form class in <code>blog/views.py</code> so open that file and at the top of the file import
-the <code>ModelForm</code> base class:</p>
+<p>We will create a class to represent our form in <code>blog/views.py</code>. Open that file and at the top
+import the <code>ModelForm</code> base class:</p>
 <pre><code class="language-python">from django.forms import ModelForm
 </code></pre>
-<p>At the bottom of the file, we will create a form class for our <code>Post</code> model by subclassing
-<code>ModelForm</code> and linking it to our model using the <code>Meta</code> inner-class:</p>
+<p>At the bottom of the file create a form class for our <code>Post</code> model by subclassing <code>ModelForm</code> and
+linking it to our model using the <code>Meta</code> inner-class:</p>
 <pre><code class="language-python">class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = [&quot;title&quot;, &quot;body&quot;, &quot;public&quot;]
 </code></pre>
 <p>The <code>fields</code> attribute determines which fields on our model can be set using this form.</p>
-<p>To render our form in the template we need to create a new instance in our view function and pass it
-into our template:</p>
+<p>To render our form in the template we need to create a new instance in our <code>new_post</code> view function
+and pass it into our template:</p>
 <pre><code class="language-python">def new_post(request):
     form = PostForm()
     return render(request, &quot;new_post.html&quot;, {&quot;form&quot;: form})
@@ -200,7 +202,7 @@ into our template:</p>
 <code>&lt;form&gt;</code> tag with a CSRF token which is used to fix a security vulnerability:</p>
 <pre><code class="language-html">&lt;body&gt;
     &lt;h1&gt;New Post&lt;/h1&gt;
-    
+
     &lt;form method=&quot;POST&quot;&gt;
         {% csrf_token %}
         {{ form.as_p }}
@@ -208,7 +210,7 @@ into our template:</p>
     &lt;/form&gt;
 &lt;/body&gt;
 </code></pre>
-<p>Refresh your New Post page and you should see the form. You can complete it and hit Submit but
+<p>Refresh your New Post page and you should see the form. You can complete it and click Submit but
 currently it wont save because we haven't configured our view function to handle submissions.</p>
 <p>Since the browser will use the <code>/new/</code> url for both fetching the HTML and for submitting the
 form, both types of requests will be handled by our <code>new_post</code> view function. We can distinguish

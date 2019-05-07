@@ -318,9 +318,9 @@ hit Enter. In the <code>&lt;body&gt;</code> tags enter:</p>
 def posts(request):
     return render(request, &quot;posts.html&quot;)
 </code></pre>
-<p>The reason we call our <code>posts.html</code> file a template is because Django provide dynamic data at
-runtime to this function to render to HTML. To demonstrate this, change the heading in <code>posts.html</code>
-to:</p>
+<p>The reason we call <code>posts.html</code> a template is because as well as regular HTML, it can contain
+special placeholder tags that Django can use to dynamically substitute in data each time a user
+requests the page. To demonstrate this, change the heading in <code>posts.html</code> to:</p>
 <pre><code class="language-html">&lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
 </code></pre>
 <p>Then make your <code>posts</code> view function provide your name to the template:</p>
@@ -329,6 +329,16 @@ to:</p>
 </code></pre>
 <p>Refresh the page in your web browser and your name should be substituted into the heading. We will
 use this same technique to pass blog posts into the template to be rendered.</p>
+<a class="header" href="#challenges-1" id="challenges-1"><h2>Challenges</h2></a>
+<ol>
+<li>Django has a large number of
+<a href="https://docs.djangoproject.com/en/2.2/ref/templates/builtins/#built-in-filter-reference"><strong>filters</strong></a>
+that transform data inside templates. Try changing <code>{{ name }}</code> to
+<code>{{ name | upper }}</code> to one such filter in action.</li>
+<li>What happens if you forget to supply the data to the template? Make it obvious when data is
+missing by adding <code>'string_if_invalid': '&lt;MISSING&gt;',</code> to the <code>OPTIONS</code> dictionary under
+<code>TEMPLATE</code> in <code>myproject/settings.py</code>.</li>
+</ol>
 <a class="header" href="#models--django-admin" id="models--django-admin"><h1>Models &amp; Django Admin</h1></a>
 <p>We would like users to be able to create new blog posts through our site. These posts will need to
 be saved to a database. Django has built-in support for interacting with SQL databases through an
@@ -356,19 +366,36 @@ where SQLite will store our data.</p>
 <pre><code class="language-bash">python manage.py createsuperuser
 </code></pre>
 <p>Set the username and password to whatever you would like. You can leave email address blank.</p>
-<p>You can now use that username and password to log in to the admin interface. Hop back to the terminal and runserver as before using this command:</p>
+<p>You can now use that username and password to log in to the admin interface. But first you will need
+to restart the server using this command:</p>
 <pre><code class="language-bash">python manage.py runserver
 </code></pre>
 <p>To access the admin interface, go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>.
-Once you are logged in
-you will see links to Groups and Users but not our Posts. This is because we haven't registered our
-<code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the following</p>
+Once you are logged in you will see links to Groups and Users but not our Posts. This is because we
+haven't registered our <code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the
+following:</p>
 <pre><code class="language-python">from .models import Post
 
 admin.site.register(Post)
 </code></pre>
 <p>If you refresh the admin interface in your browser you should now see a row for managing Posts.
-Click the Add link and create a few Posts. In the next stage we will render them on our website.</p>
+Click the <strong>Add</strong> link and create a few Posts. Once you are done you should see several posts listed
+as in the screenshot below. In the next stage we will render them on our website.</p>
+<p><img src="images/admin-interface-with-posts.png" alt="" /></p>
+<a class="header" href="#challenges-2" id="challenges-2"><h2>Challenges</h2></a>
+<ol>
+<li>
+<p>The admin interface can be highly customised. For example, we can make the table listing our
+posts more informative by displaying the title of the posts instead of &quot;Post object&quot;. To do this
+replace <code>admin.site.register(Post)</code> line in <code>blog/admin.py</code> with:</p>
+<pre><code class="language-python">@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'public', 'created']
+</code></pre>
+<p>Reload <a href="http://127.0.0.1:8000/admin/blog/post/">http://127.0.0.1:8000/admin/blog/post/</a> to see
+the effect.</p>
+</li>
+</ol>
 <a class="header" href="#querying--displaying-models" id="querying--displaying-models"><h1>Querying &amp; Displaying Models</h1></a>
 <p>Now we have some blog posts in our database we can update our view and template to display them.
 Open <code>blog/views.py</code> and import our <code>Post</code> model at the top of the file:</p>
@@ -397,7 +424,7 @@ is terminated with <code>{% endfor %}</code>:</p>
 and a paragraph tag (<code>&lt;p&gt;</code>) containing the body of the post. Save this and go back to
 <a href="http://127.0.0.1:8000/">your homepage</a> and you should see the posts that you entered in the admin
 interface.</p>
-<a class="header" href="#challenges-1" id="challenges-1"><h2>Challenges</h2></a>
+<a class="header" href="#challenges-3" id="challenges-3"><h2>Challenges</h2></a>
 <ol>
 <li>
 <p>We are currently showing all posts, including those where <code>public</code> is set to false in the
@@ -445,7 +472,7 @@ Your HTML should look like:</p>
 </code></pre>
 <p>Next we need to create a url for this page. Open <code>myproject/urls.py</code> and add a path for the new page to
 <code>urlpatterns</code>:</p>
-<pre><code>urlpatterns = [
+<pre><code class="language-python">urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.posts),
     path('new/', views.new_post),
@@ -456,23 +483,25 @@ and below the heading add a <code>&lt;a&gt;</code> tag:</p>
 <pre><code class="language-html">&lt;body&gt;
     &lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
     &lt;a href=&quot;/new/&quot;&gt;Create a new post&lt;/a&gt;
+
+    &lt;!-- the rest of the body is unchanged --&gt;
 </code></pre>
 <p>Test that everything works by refreshing your home page and following the link. You should see your
 <code>New Post</code> heading.</p>
-<p>We will create the form class in <code>blog/views.py</code> so open that file and at the top of the file import
-the <code>ModelForm</code> base class:</p>
+<p>We will create a class to represent our form in <code>blog/views.py</code>. Open that file and at the top
+import the <code>ModelForm</code> base class:</p>
 <pre><code class="language-python">from django.forms import ModelForm
 </code></pre>
-<p>At the bottom of the file, we will create a form class for our <code>Post</code> model by subclassing
-<code>ModelForm</code> and linking it to our model using the <code>Meta</code> inner-class:</p>
+<p>At the bottom of the file create a form class for our <code>Post</code> model by subclassing <code>ModelForm</code> and
+linking it to our model using the <code>Meta</code> inner-class:</p>
 <pre><code class="language-python">class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = [&quot;title&quot;, &quot;body&quot;, &quot;public&quot;]
 </code></pre>
 <p>The <code>fields</code> attribute determines which fields on our model can be set using this form.</p>
-<p>To render our form in the template we need to create a new instance in our view function and pass it
-into our template:</p>
+<p>To render our form in the template we need to create a new instance in our <code>new_post</code> view function
+and pass it into our template:</p>
 <pre><code class="language-python">def new_post(request):
     form = PostForm()
     return render(request, &quot;new_post.html&quot;, {&quot;form&quot;: form})
@@ -481,7 +510,7 @@ into our template:</p>
 <code>&lt;form&gt;</code> tag with a CSRF token which is used to fix a security vulnerability:</p>
 <pre><code class="language-html">&lt;body&gt;
     &lt;h1&gt;New Post&lt;/h1&gt;
-    
+
     &lt;form method=&quot;POST&quot;&gt;
         {% csrf_token %}
         {{ form.as_p }}
@@ -489,7 +518,7 @@ into our template:</p>
     &lt;/form&gt;
 &lt;/body&gt;
 </code></pre>
-<p>Refresh your New Post page and you should see the form. You can complete it and hit Submit but
+<p>Refresh your New Post page and you should see the form. You can complete it and click Submit but
 currently it wont save because we haven't configured our view function to handle submissions.</p>
 <p>Since the browser will use the <code>/new/</code> url for both fetching the HTML and for submitting the
 form, both types of requests will be handled by our <code>new_post</code> view function. We can distinguish

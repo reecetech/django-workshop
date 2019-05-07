@@ -195,9 +195,9 @@ hit Enter. In the <code>&lt;body&gt;</code> tags enter:</p>
 def posts(request):
     return render(request, &quot;posts.html&quot;)
 </code></pre>
-<p>The reason we call our <code>posts.html</code> file a template is because Django provide dynamic data at
-runtime to this function to render to HTML. To demonstrate this, change the heading in <code>posts.html</code>
-to:</p>
+<p>The reason we call <code>posts.html</code> a template is because as well as regular HTML, it can contain
+special placeholder tags that Django can use to dynamically substitute in data each time a user
+requests the page. To demonstrate this, change the heading in <code>posts.html</code> to:</p>
 <pre><code class="language-html">&lt;h1&gt;Welcome to {{ name }}'s Blog!&lt;/h1&gt;
 </code></pre>
 <p>Then make your <code>posts</code> view function provide your name to the template:</p>
@@ -206,6 +206,16 @@ to:</p>
 </code></pre>
 <p>Refresh the page in your web browser and your name should be substituted into the heading. We will
 use this same technique to pass blog posts into the template to be rendered.</p>
+<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
+<ol>
+<li>Django has a large number of
+<a href="https://docs.djangoproject.com/en/2.2/ref/templates/builtins/#built-in-filter-reference"><strong>filters</strong></a>
+that transform data inside templates. Try changing <code>{{ name }}</code> to
+<code>{{ name | upper }}</code> to one such filter in action.</li>
+<li>What happens if you forget to supply the data to the template? Make it obvious when data is
+missing by adding <code>'string_if_invalid': '&lt;MISSING&gt;',</code> to the <code>OPTIONS</code> dictionary under
+<code>TEMPLATE</code> in <code>myproject/settings.py</code>.</li>
+</ol>
 
                     </main>
 
