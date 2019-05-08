@@ -77,8 +77,22 @@ Go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in web browser to see you
 
 ## Challenges
 
-1. Run the following command to see some of the other django management commands that are available:
+1. Open a second terminal by clicking the **+** next to the **Local** tab in the terminal pane at
+   the bottom of PyCharm. In this new terminal, run the following command to see some of the other
+   django management commands that are available:
 
-    ```bash
-    python manage.py help
-    ```
+   ```bash
+   python manage.py help
+   ```
+   
+   You can get more information about a command with
+   
+   ```bash
+   python manage.py help COMMAND
+   ```
+   
+   For example:
+   
+   ```bash
+   python manage.py help runserver
+   ```
