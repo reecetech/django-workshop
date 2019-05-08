@@ -69,7 +69,7 @@ sudo apt-get install python3
 Open a terminal and run:
 
 ```bash
-sudo yum install python3
+sudo dnf install python3
 ```
 
 ### CentOS

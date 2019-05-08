@@ -6,3 +6,4 @@
 - [Models & Django Admin](./04-models-and-admin.md)
 - [Querying & Displaying Models](./05-querying-and-displaying-models.md)
 - [Forms](./06-forms.md)
+- [What's Next](./07-whats-next.md)

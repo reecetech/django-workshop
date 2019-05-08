@@ -123,3 +123,17 @@ redirect function at the top of `blog/views.py`:
 ```python
 from django.shortcuts import render, redirect
 ```
+
+Once you have made that change, try creating a new post through your site and confirm it is
+displayed on the home page.
+
+## Challenges
+
+1. Blogs typically display the most recent posts at the top of the page. Make yours do that by
+   adding `.order_by("-created")` to the model query in the `posts` function in `blog/views.py`:
+   
+   ```python
+   def posts(request):
+       posts = Post.objects.all().order_by("-created")
+       return render(request, "posts.html", {"name": "Alice", "posts": posts})
+   ```
