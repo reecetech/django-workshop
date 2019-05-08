@@ -258,8 +258,16 @@ you would configure them to listen on different ports.</p>
 <a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
 <ol>
 <li>
-<p>Run the following command to see some of the other django management commands that are available:</p>
+<p>Open a second terminal by clicking the <strong>+</strong> next to the <strong>Local</strong> tab in the terminal pane at
+the bottom of PyCharm. In this new terminal, run the following command to see some of the other
+django management commands that are available:</p>
 <pre><code class="language-bash">python manage.py help
+</code></pre>
+<p>You can get more information about a command with</p>
+<pre><code class="language-bash">python manage.py help COMMAND
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-bash">python manage.py help runserver
 </code></pre>
 </li>
 </ol>
@@ -354,8 +362,9 @@ Python objects called <strong>models</strong>. Let's create a model for our blog
 <p>Django will automatically create and update the database table schema to match our model. It does
 this through database <strong>migrations</strong> which are files containing the SQL commands needed to configure
 the database.</p>
-<p>To generate and apply migrations to create our Post table run the following in the terminal,
-(after terminating <code>python manage.py runserver</code> using <strong>Ctrl + C</strong>)</p>
+<p>To generate and apply migrations to create our Post table run the following command in the terminal.
+If your terminal is blocked by the <code>python manage.py runserver</code> command you can open a new terminal
+with the <strong>+</strong> button.</p>
 <pre><code class="language-bash">python manage.py makemigrations
 python manage.py migrate
 </code></pre>
@@ -366,11 +375,8 @@ where SQLite will store our data.</p>
 <pre><code class="language-bash">python manage.py createsuperuser
 </code></pre>
 <p>Set the username and password to whatever you would like. You can leave email address blank.</p>
-<p>You can now use that username and password to log in to the admin interface. But first you will need
-to restart the server using this command:</p>
-<pre><code class="language-bash">python manage.py runserver
-</code></pre>
-<p>To access the admin interface, go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>.
+<p>You can now use that username and password to log in to the admin interface. To access the admin
+interface, go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>.
 Once you are logged in you will see links to Groups and Users but not our Posts. This is because we
 haven't registered our <code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the
 following:</p>
