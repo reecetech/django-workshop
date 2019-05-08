@@ -185,15 +185,16 @@ installed (and which version it is), open a console and type the following comma
 system's package manager:</p>
 <a class="header" href="#debian-or-ubuntu" id="debian-or-ubuntu"><h3>Debian or Ubuntu</h3></a>
 <p>Open a terminal and run:</p>
-<pre><code class="language-bash">sudo apt-get install python3
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install python3 python3-pip
 </code></pre>
 <a class="header" href="#fedora" id="fedora"><h3>Fedora</h3></a>
 <p>Open a terminal and run:</p>
 <pre><code class="language-bash">sudo dnf install python3
 </code></pre>
 <a class="header" href="#centos" id="centos"><h3>CentOS</h3></a>
-<p>Open a terminal and run:</p>
-<pre><code class="language-bash">sudo yum install python3
+<pre><code class="language-bash">sudo yum install epel-release
+sudo yum install python36 python36-pip
 </code></pre>
 <a class="header" href="#installing-pycharm" id="installing-pycharm"><h2>Installing PyCharm</h2></a>
 <p>To install PyCharm visit <a href="https://www.jetbrains.com/pycharm/">https://www.jetbrains.com/pycharm/</a>

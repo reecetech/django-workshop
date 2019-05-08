@@ -61,7 +61,8 @@ system's package manager:
 Open a terminal and run:
 
 ```bash
-sudo apt-get install python3
+sudo apt-get update
+sudo apt-get install python3 python3-pip
 ```
 
 ### Fedora
@@ -74,10 +75,9 @@ sudo dnf install python3
 
 ### CentOS
 
-Open a terminal and run:
-
 ```bash
-sudo yum install python3
+sudo yum install epel-release
+sudo yum install python36 python36-pip
 ```
 
 ## Installing PyCharm
