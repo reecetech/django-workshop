@@ -19,8 +19,9 @@ Django will automatically create and update the database table schema to match o
 this through database **migrations** which are files containing the SQL commands needed to configure
 the database.
 
-To generate and apply migrations to create our Post table run the following in the terminal,
-(after terminating `python manage.py runserver` using **Ctrl + C**)
+To generate and apply migrations to create our Post table run the following command in the terminal.
+If your terminal is blocked by the `python manage.py runserver` command you can open a new terminal
+with the **+** button.
 
 ```bash
 python manage.py makemigrations
@@ -40,14 +41,8 @@ python manage.py createsuperuser
 
 Set the username and password to whatever you would like. You can leave email address blank.
 
-You can now use that username and password to log in to the admin interface. But first you will need
-to restart the server using this command: 
-
-```bash
-python manage.py runserver
-```
-
-To access the admin interface, go to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
+You can now use that username and password to log in to the admin interface. To access the admin
+interface, go to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
 Once you are logged in you will see links to Groups and Users but not our Posts. This is because we
 haven't registered our `Post` model with the admin app. To do that open `blog/admin.py` and add the
 following:
