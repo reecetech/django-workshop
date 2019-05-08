@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html" class="active"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li></ol>
+            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html" class="active"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li><li><a href="07-whats-next.html"><strong aria-hidden="true">7.</strong> What's Next</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -155,9 +155,9 @@ Django:</p>
 <pre><code class="language-bash">pip install django
 </code></pre>
 <p>Once pip has finished installing Django, create a new Django project by executing:</p>
-<pre><code>django-admin startproject myproject .
+<pre><code>django-admin startproject main .
 </code></pre>
-<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>myproject</code> and a file called
+<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>main</code> and a file called
 <code>manage.py</code>. The <code>manage.py</code> is used to execute Django management commands like creating admin users
 and running database migrations.</p>
 <p>Next we will create what is known as a Django app. In the Django context, an app is a component of a
@@ -175,7 +175,7 @@ following table summaries the intention behind each file:</p>
 <tr><td> <code>apps.py</code>   </td><td> used to configure the app                                       </td></tr>
 <tr><td> <code>tests.py</code>  </td><td> a place to write automated tests for your app                   </td></tr>
 </tbody></table>
-<p>To install your <code>blog</code> app into your Django project, open <code>myproject/settings.py</code> and at the end of the
+<p>To install your <code>blog</code> app into your Django project, open <code>main/settings.py</code> and at the end of the
 <code>INSTALLED_APPS</code> list add <code>'blog'</code>. It should look like:</p>
 <pre><code class="language-python">INSTALLED_APPS = [
     'django.contrib.admin',

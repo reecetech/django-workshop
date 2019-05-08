@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li></ol>
+            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li><li><a href="07-whats-next.html"><strong aria-hidden="true">7.</strong> What's Next</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -189,7 +189,7 @@ system's package manager:</p>
 </code></pre>
 <a class="header" href="#fedora" id="fedora"><h3>Fedora</h3></a>
 <p>Open a terminal and run:</p>
-<pre><code class="language-bash">sudo yum install python3
+<pre><code class="language-bash">sudo dnf install python3
 </code></pre>
 <a class="header" href="#centos" id="centos"><h3>CentOS</h3></a>
 <p>Open a terminal and run:</p>
@@ -214,9 +214,9 @@ Django:</p>
 <pre><code class="language-bash">pip install django
 </code></pre>
 <p>Once pip has finished installing Django, create a new Django project by executing:</p>
-<pre><code>django-admin startproject myproject .
+<pre><code>django-admin startproject main .
 </code></pre>
-<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>myproject</code> and a file called
+<p>In the <strong>Project</strong> pane on the left you will see a folder called <code>main</code> and a file called
 <code>manage.py</code>. The <code>manage.py</code> is used to execute Django management commands like creating admin users
 and running database migrations.</p>
 <p>Next we will create what is known as a Django app. In the Django context, an app is a component of a
@@ -234,7 +234,7 @@ following table summaries the intention behind each file:</p>
 <tr><td> <code>apps.py</code>   </td><td> used to configure the app                                       </td></tr>
 <tr><td> <code>tests.py</code>  </td><td> a place to write automated tests for your app                   </td></tr>
 </tbody></table>
-<p>To install your <code>blog</code> app into your Django project, open <code>myproject/settings.py</code> and at the end of the
+<p>To install your <code>blog</code> app into your Django project, open <code>main/settings.py</code> and at the end of the
 <code>INSTALLED_APPS</code> list add <code>'blog'</code>. It should look like:</p>
 <pre><code class="language-python">INSTALLED_APPS = [
     'django.contrib.admin',
@@ -274,7 +274,7 @@ the browser will display to the user.</p>
 def posts(request):
     return HttpResponse('It works!')
 </code></pre>
-<p>We also need to configure which url will execute this view function. Open <code>myproject/urls.py</code> and
+<p>We also need to configure which url will execute this view function. Open <code>main/urls.py</code> and
 import our <code>views</code> module at the top of the file below the existing import:</p>
 <pre><code class="language-python">from blog import views
 </code></pre>
@@ -337,7 +337,7 @@ that transform data inside templates. Try changing <code>{{ name }}</code> to
 <code>{{ name | upper }}</code> to one such filter in action.</li>
 <li>What happens if you forget to supply the data to the template? Make it obvious when data is
 missing by adding <code>'string_if_invalid': '&lt;MISSING&gt;',</code> to the <code>OPTIONS</code> dictionary under
-<code>TEMPLATE</code> in <code>myproject/settings.py</code>.</li>
+<code>TEMPLATE</code> in <code>main/settings.py</code>.</li>
 </ol>
 <a class="header" href="#models--django-admin" id="models--django-admin"><h1>Models &amp; Django Admin</h1></a>
 <p>We would like users to be able to create new blog posts through our site. These posts will need to
@@ -470,7 +470,7 @@ Your HTML should look like:</p>
 <pre><code class="language-python">def new_post(request):
     return render(request, &quot;new_post.html&quot;)
 </code></pre>
-<p>Next we need to create a url for this page. Open <code>myproject/urls.py</code> and add a path for the new page to
+<p>Next we need to create a url for this page. Open <code>main/urls.py</code> and add a path for the new page to
 <code>urlpatterns</code>:</p>
 <pre><code class="language-python">urlpatterns = [
     path('admin/', admin.site.urls),
@@ -537,6 +537,31 @@ whereas submissions of the form will have method <code>POST</code>.</p>
 redirect function at the top of <code>blog/views.py</code>:</p>
 <pre><code class="language-python">from django.shortcuts import render, redirect
 </code></pre>
+<p>Once you have made that change, try creating a new post through your site and confirm it is
+displayed on the home page.</p>
+<a class="header" href="#challenges-4" id="challenges-4"><h2>Challenges</h2></a>
+<ol>
+<li>
+<p>Blogs typically display the most recent posts at the top of the page. Make yours do that by
+adding <code>.order_by(&quot;-created&quot;)</code> to the model query in the <code>posts</code> function in <code>blog/views.py</code>:</p>
+<pre><code class="language-python">def posts(request):
+    posts = Post.objects.all().order_by(&quot;-created&quot;)
+    return render(request, &quot;posts.html&quot;, {&quot;name&quot;: &quot;Alice&quot;, &quot;posts&quot;: posts})
+</code></pre>
+</li>
+</ol>
+<a class="header" href="#whats-next" id="whats-next"><h1>What's Next</h1></a>
+<p>We now have a blog which allows us to create and view posts. We have also learned how to manage our
+posts through the Django Admin interface. Functionality that would be nice to add would be:</p>
+<ul>
+<li>Deleting posts</li>
+<li>Updating posts</li>
+<li>Styling your site using CSS</li>
+</ul>
+<p>We encourage you to try doing these on your own. If you want to go even further, we highly recommend
+then <a href="https://tutorial.djangogirls.org/en/">Django Girls Tutorial</a> which covers many other important
+topics including using source control, publishing your code to GitHub and deploying your code on the
+web.</p>
 
                     </main>
 

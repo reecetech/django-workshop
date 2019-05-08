@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html" class="active"><strong aria-hidden="true">6.</strong> Forms</a></li></ol>
+            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html" class="active"><strong aria-hidden="true">6.</strong> Forms</a></li><li><a href="07-whats-next.html"><strong aria-hidden="true">7.</strong> What's Next</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -162,7 +162,7 @@ Your HTML should look like:</p>
 <pre><code class="language-python">def new_post(request):
     return render(request, &quot;new_post.html&quot;)
 </code></pre>
-<p>Next we need to create a url for this page. Open <code>myproject/urls.py</code> and add a path for the new page to
+<p>Next we need to create a url for this page. Open <code>main/urls.py</code> and add a path for the new page to
 <code>urlpatterns</code>:</p>
 <pre><code class="language-python">urlpatterns = [
     path('admin/', admin.site.urls),
@@ -229,6 +229,19 @@ whereas submissions of the form will have method <code>POST</code>.</p>
 redirect function at the top of <code>blog/views.py</code>:</p>
 <pre><code class="language-python">from django.shortcuts import render, redirect
 </code></pre>
+<p>Once you have made that change, try creating a new post through your site and confirm it is
+displayed on the home page.</p>
+<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
+<ol>
+<li>
+<p>Blogs typically display the most recent posts at the top of the page. Make yours do that by
+adding <code>.order_by(&quot;-created&quot;)</code> to the model query in the <code>posts</code> function in <code>blog/views.py</code>:</p>
+<pre><code class="language-python">def posts(request):
+    posts = Post.objects.all().order_by(&quot;-created&quot;)
+    return render(request, &quot;posts.html&quot;, {&quot;name&quot;: &quot;Alice&quot;, &quot;posts&quot;: posts})
+</code></pre>
+</li>
+</ol>
 
                     </main>
 
@@ -240,6 +253,10 @@ redirect function at the top of <code>blog/views.py</code>:</p>
                             </a>
                         
 
+                        
+                            <a rel="next" href="07-whats-next.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -254,6 +271,10 @@ redirect function at the top of <code>blog/views.py</code>:</p>
                     </a>
                 
 
+                
+                    <a href="07-whats-next.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 

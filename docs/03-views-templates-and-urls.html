@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html" class="active"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li></ol>
+            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html" class="active"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li><li><a href="07-whats-next.html"><strong aria-hidden="true">7.</strong> What's Next</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -151,7 +151,7 @@ the browser will display to the user.</p>
 def posts(request):
     return HttpResponse('It works!')
 </code></pre>
-<p>We also need to configure which url will execute this view function. Open <code>myproject/urls.py</code> and
+<p>We also need to configure which url will execute this view function. Open <code>main/urls.py</code> and
 import our <code>views</code> module at the top of the file below the existing import:</p>
 <pre><code class="language-python">from blog import views
 </code></pre>
@@ -214,7 +214,7 @@ that transform data inside templates. Try changing <code>{{ name }}</code> to
 <code>{{ name | upper }}</code> to one such filter in action.</li>
 <li>What happens if you forget to supply the data to the template? Make it obvious when data is
 missing by adding <code>'string_if_invalid': '&lt;MISSING&gt;',</code> to the <code>OPTIONS</code> dictionary under
-<code>TEMPLATE</code> in <code>myproject/settings.py</code>.</li>
+<code>TEMPLATE</code> in <code>main/settings.py</code>.</li>
 </ol>
 
                     </main>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Models &amp; Django Admin - Django Workshop</title>
+        <title>What's Next - Django Workshop</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html" class="active"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li><li><a href="07-whats-next.html"><strong aria-hidden="true">7.</strong> What's Next</a></li></ol>
+            <ol class="chapter"><li><a href="01-installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="02-creating-a-project.html"><strong aria-hidden="true">2.</strong> Creating a Project</a></li><li><a href="03-views-templates-and-urls.html"><strong aria-hidden="true">3.</strong> Views, Templates and URLs</a></li><li><a href="04-models-and-admin.html"><strong aria-hidden="true">4.</strong> Models &amp; Django Admin</a></li><li><a href="05-querying-and-displaying-models.html"><strong aria-hidden="true">5.</strong> Querying &amp; Displaying Models</a></li><li><a href="06-forms.html"><strong aria-hidden="true">6.</strong> Forms</a></li><li><a href="07-whats-next.html" class="active"><strong aria-hidden="true">7.</strong> What's Next</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -140,78 +140,29 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#models--django-admin" id="models--django-admin"><h1>Models &amp; Django Admin</h1></a>
-<p>We would like users to be able to create new blog posts through our site. These posts will need to
-be saved to a database. Django has built-in support for interacting with SQL databases through an
-Object-Relational-Mapping or ORM. In this model, rows in the database table are represented by
-Python objects called <strong>models</strong>. Let's create a model for our blog posts.</p>
-<p>Open <code>blog/models.py</code> and add the following:</p>
-<pre><code class="language-python">class Post(models.Model):
-    title = models.CharField(max_length=100)
-    body = models.TextField()
-    public = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
-</code></pre>
-<p>Django will automatically create and update the database table schema to match our model. It does
-this through database <strong>migrations</strong> which are files containing the SQL commands needed to configure
-the database.</p>
-<p>To generate and apply migrations to create our Post table run the following in the terminal,
-(after terminating <code>python manage.py runserver</code> using <strong>Ctrl + C</strong>)</p>
-<pre><code class="language-bash">python manage.py makemigrations
-python manage.py migrate
-</code></pre>
-<p>By default, Django uses SQLite as the database. You should see a <code>db.sqlite3</code> file; this is
-where SQLite will store our data.</p>
-<p>Django automatically creates an admin interface that we can use to interact with our database.</p>
-<p>In order to login we need to create a super-user account. Hop back to the terminal and run:</p>
-<pre><code class="language-bash">python manage.py createsuperuser
-</code></pre>
-<p>Set the username and password to whatever you would like. You can leave email address blank.</p>
-<p>You can now use that username and password to log in to the admin interface. But first you will need
-to restart the server using this command:</p>
-<pre><code class="language-bash">python manage.py runserver
-</code></pre>
-<p>To access the admin interface, go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>.
-Once you are logged in you will see links to Groups and Users but not our Posts. This is because we
-haven't registered our <code>Post</code> model with the admin app. To do that open <code>blog/admin.py</code> and add the
-following:</p>
-<pre><code class="language-python">from .models import Post
-
-admin.site.register(Post)
-</code></pre>
-<p>If you refresh the admin interface in your browser you should now see a row for managing Posts.
-Click the <strong>Add</strong> link and create a few Posts. Once you are done you should see several posts listed
-as in the screenshot below. In the next stage we will render them on our website.</p>
-<p><img src="images/admin-interface-with-posts.png" alt="" /></p>
-<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
-<ol>
-<li>
-<p>The admin interface can be highly customised. For example, we can make the table listing our
-posts more informative by displaying the title of the posts instead of &quot;Post object&quot;. To do this
-replace <code>admin.site.register(Post)</code> line in <code>blog/admin.py</code> with:</p>
-<pre><code class="language-python">@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'public', 'created']
-</code></pre>
-<p>Reload <a href="http://127.0.0.1:8000/admin/blog/post/">http://127.0.0.1:8000/admin/blog/post/</a> to see
-the effect.</p>
-</li>
-</ol>
+                        <a class="header" href="#whats-next" id="whats-next"><h1>What's Next</h1></a>
+<p>We now have a blog which allows us to create and view posts. We have also learned how to manage our
+posts through the Django Admin interface. Functionality that would be nice to add would be:</p>
+<ul>
+<li>Deleting posts</li>
+<li>Updating posts</li>
+<li>Styling your site using CSS</li>
+</ul>
+<p>We encourage you to try doing these on your own. If you want to go even further, we highly recommend
+then <a href="https://tutorial.djangogirls.org/en/">Django Girls Tutorial</a> which covers many other important
+topics including using source control, publishing your code to GitHub and deploying your code on the
+web.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="03-views-templates-and-urls.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="06-forms.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="05-querying-and-displaying-models.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -221,15 +172,11 @@ the effect.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="03-views-templates-and-urls.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="06-forms.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="05-querying-and-displaying-models.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
