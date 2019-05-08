@@ -20,10 +20,10 @@ pip install django
 Once pip has finished installing Django, create a new Django project by executing:
 
 ```
-django-admin startproject myproject .
+django-admin startproject main .
 ```
 
-In the **Project** pane on the left you will see a folder called `myproject` and a file called
+In the **Project** pane on the left you will see a folder called `main` and a file called
 `manage.py`. The `manage.py` is used to execute Django management commands like creating admin users
 and running database migrations.
 
@@ -48,7 +48,7 @@ following table summaries the intention behind each file:
 | `apps.py`   | used to configure the app                                       |
 | `tests.py`  | a place to write automated tests for your app                   |
 
-To install your `blog` app into your Django project, open `myproject/settings.py` and at the end of the
+To install your `blog` app into your Django project, open `main/settings.py` and at the end of the
 `INSTALLED_APPS` list add `'blog'`. It should look like:
 
 ```python

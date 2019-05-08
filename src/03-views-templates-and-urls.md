@@ -15,7 +15,7 @@ def posts(request):
     return HttpResponse('It works!')
 ```
 
-We also need to configure which url will execute this view function. Open `myproject/urls.py` and
+We also need to configure which url will execute this view function. Open `main/urls.py` and
 import our `views` module at the top of the file below the existing import:
 
 ```python
@@ -103,4 +103,4 @@ use this same technique to pass blog posts into the template to be rendered.
    `{{ name | upper }}` to one such filter in action.
 3. What happens if you forget to supply the data to the template? Make it obvious when data is
    missing by adding `'string_if_invalid': '<MISSING>',` to the `OPTIONS` dictionary under
-   `TEMPLATE` in `myproject/settings.py`.
+   `TEMPLATE` in `main/settings.py`.
